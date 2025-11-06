@@ -3,223 +3,357 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sinterklaas Nieuws - Volg de Reis</title>
+    <title>nu.nl - Het laatste nieuws</title>
     <style>
         :root {
-            --primary-red: #C8102E;
-            --secondary-red: #E4002B;
-            --gold: #FFD700;
-            --dark-blue: #1E3A8A;
-            --light-bg: #F8F9FA;
+            --nu-red: #CC0000;
+            --nu-dark-red: #990000;
+            --nu-gray: #F5F5F5;
+            --nu-dark-gray: #333333;
+            --nu-border: #E5E5E5;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
         }
         
         body {
-            background-color: var(--light-bg);
-            color: #333;
-            line-height: 1.6;
+            background-color: white;
+            color: var(--nu-dark-gray);
+            line-height: 1.5;
         }
         
+        /* Header */
         header {
-            background: linear-gradient(135deg, var(--primary-red), var(--dark-blue));
-            color: white;
-            padding: 1rem;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background-color: white;
+            border-bottom: 1px solid var(--nu-border);
+            padding: 10px 0;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
         }
         
         .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--nu-red);
+        }
+        
+        .nav-links {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
+            list-style: none;
         }
         
-        .logo h1 {
-            font-size: 2.5rem;
-            margin-left: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        .nav-links li {
+            margin-left: 20px;
         }
         
-        .logo-icon {
-            font-size: 3rem;
+        .nav-links a {
+            text-decoration: none;
+            color: var(--nu-dark-gray);
+            font-weight: bold;
         }
         
-        .date-display {
-            font-size: 1.2rem;
-            margin-top: 0.5rem;
-            opacity: 0.9;
+        .nav-links a:hover {
+            color: var(--nu-red);
+        }
+        
+        .sint-button {
+            background-color: var(--nu-red);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .sint-button:hover {
+            background-color: var(--nu-dark-red);
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
         
         .featured-article {
-            background-color: white;
-            margin: 2rem auto;
-            max-width: 1200px;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            margin: 30px 0;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
         }
         
-        .featured-image {
+        .main-article {
+            position: relative;
+        }
+        
+        .main-article img {
             width: 100%;
             height: 400px;
             object-fit: cover;
+            border-radius: 4px;
         }
         
-        .featured-content {
-            padding: 2rem;
-        }
-        
-        .featured-content h2 {
-            color: var(--primary-red);
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-        
-        .featured-content p {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .read-more {
-            display: inline-block;
-            background-color: var(--primary-red);
+        .main-article-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
             color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 30px;
+            padding: 20px;
+        }
+        
+        .main-article h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .main-article p {
+            font-size: 1.1rem;
+        }
+        
+        .side-articles {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .side-article {
+            display: flex;
+            gap: 15px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--nu-border);
+        }
+        
+        .side-article:last-child {
+            border-bottom: none;
+        }
+        
+        .side-article img {
+            width: 120px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        
+        .side-article-content h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .side-article-content p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* News Sections */
+        .news-section {
+            margin: 40px 0;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--nu-red);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .section-header h2 {
+            font-size: 1.5rem;
+            color: var(--nu-red);
+        }
+        
+        .section-header a {
+            color: var(--nu-red);
             text-decoration: none;
             font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        
-        .read-more:hover {
-            background-color: var(--dark-blue);
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-        
-        .news-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem 3rem;
-        }
-        
-        .news-section h2 {
-            color: var(--dark-blue);
-            font-size: 1.8rem;
-            margin: 2rem 0 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 3px solid var(--gold);
         }
         
         .news-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
         }
         
         .news-card {
-            background-color: white;
-            border-radius: 10px;
+            border: 1px solid var(--nu-border);
+            border-radius: 4px;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
         
         .news-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
-        .news-image {
+        .news-card img {
             width: 100%;
-            height: 180px;
+            height: 160px;
             object-fit: cover;
         }
         
-        .news-content {
-            padding: 1.2rem;
+        .news-card-content {
+            padding: 15px;
         }
         
-        .news-date {
-            color: #666;
+        .news-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        
+        .news-card p {
             font-size: 0.9rem;
-            margin-bottom: 0.5rem;
+            color: #666;
+            margin-bottom: 10px;
         }
         
-        .news-content h3 {
-            color: var(--primary-red);
-            margin-bottom: 0.8rem;
-            font-size: 1.3rem;
-        }
-        
-        .news-content p {
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
-        }
-        
-        .card-link {
-            color: var(--dark-blue);
+        .news-card a {
+            color: var(--nu-red);
             text-decoration: none;
             font-weight: bold;
-            display: inline-flex;
-            align-items: center;
+            font-size: 0.9rem;
         }
         
-        .card-link:hover {
-            text-decoration: underline;
+        /* Sinterklaas Section */
+        .sinterklaas-section {
+            background-color: var(--nu-gray);
+            padding: 30px;
+            border-radius: 8px;
+            margin: 40px 0;
+            display: none;
         }
         
-        footer {
-            background-color: var(--dark-blue);
-            color: white;
-            text-align: center;
-            padding: 2rem 1rem;
-            margin-top: 2rem;
+        .sinterklaas-section.active {
+            display: block;
+        }
+        
+        .sint-progress {
+            margin: 20px 0;
         }
         
         .progress-bar {
-            height: 8px;
+            height: 10px;
             background-color: #e0e0e0;
-            border-radius: 4px;
-            margin: 1.5rem 0;
+            border-radius: 5px;
             overflow: hidden;
         }
         
         .progress {
             height: 100%;
-            background: linear-gradient(90deg, var(--primary-red), var(--gold));
-            border-radius: 4px;
-            transition: width 0.5s ease;
+            background: linear-gradient(90deg, #CC0000, #FFD700);
+            border-radius: 5px;
+            width: 45%;
         }
         
         .progress-text {
             display: flex;
             justify-content: space-between;
+            margin-top: 5px;
             font-size: 0.9rem;
             color: #666;
-            margin-top: 0.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--nu-gray);
+            padding: 40px 0;
+            margin-top: 40px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        
+        .footer-column h3 {
+            color: var(--nu-red);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-column a {
+            text-decoration: none;
+            color: var(--nu-dark-gray);
+        }
+        
+        .footer-column a:hover {
+            color: var(--nu-red);
+        }
+        
+        .copyright {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid var(--nu-border);
+            margin-top: 30px;
+            color: #666;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .news-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .featured-article {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
         
         @media (max-width: 768px) {
-            .logo h1 {
-                font-size: 1.8rem;
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
             }
             
-            .featured-image {
-                height: 250px;
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
             }
             
-            .featured-content h2 {
-                font-size: 1.6rem;
+            .nav-links li {
+                margin: 5px 10px;
             }
             
             .news-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
                 grid-template-columns: 1fr;
             }
         }
@@ -227,175 +361,293 @@
 </head>
 <body>
     <header>
-        <div class="logo">
-            <div class="logo-icon">🎅</div>
-            <h1>Sinterklaas Nieuws</h1>
+        <div class="header-container">
+            <div class="logo">nu.nl</div>
+            <ul class="nav-links">
+                <li><a href="#">Voorpagina</a></li>
+                <li><a href="#">Laatste nieuws</a></li>
+                <li><a href="#">Sport</a></li>
+                <li><a href="#">Tech</a></li>
+                <li><a href="#">Economie</a></li>
+                <li><a href="#">Entertainment</a></li>
+            </ul>
+            <button class="sint-button" id="sintToggle">Sinterklaas nieuws</button>
         </div>
-        <p class="date-display" id="currentDate">Vandaag is het ...</p>
     </header>
     
-    <main>
+    <main class="container">
+        <!-- Featured Article -->
         <section class="featured-article">
-            <img id="featuredImage" class="featured-image" src="" alt="Sinterklaas nieuws">
-            <div class="featured-content">
-                <h2 id="featuredTitle">Onderwerp van de dag</h2>
-                <p id="featuredText">Beschrijving van het dagelijkse onderwerp over Sinterklaas.</p>
-                <a href="dagbericht.html" class="read-more">Lees het volledige bericht</a>
+            <div class="main-article">
+                <img src="https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Politiek nieuws">
+                <div class="main-article-content">
+                    <h1>Kabinet presenteert nieuwe plannen voor klimaatbeleid</h1>
+                    <p>Het kabinet heeft vandaag nieuwe maatregelen aangekondigd om de klimaatdoelen voor 2030 te halen. Lees hier de details.</p>
+                </div>
+            </div>
+            
+            <div class="side-articles">
+                <div class="side-article">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Sport nieuws">
+                    <div class="side-article-content">
+                        <h3>Nederlandse atleet wint goud op EK</h3>
+                        <p>In een spectaculaire finale wist de Nederlandse atleet de eerste plek te veroveren.</p>
+                    </div>
+                </div>
+                
+                <div class="side-article">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Tech nieuws">
+                    <div class="side-article-content">
+                        <h3>Nieuwe smartphone breekt verkooprecords</h3>
+                        <p>De nieuwste smartphone van het populaire merk heeft in het eerste weekend al meer dan 2 miljoen exemplaren verkocht.</p>
+                    </div>
+                </div>
+                
+                <div class="side-article">
+                    <img src="https://images.unsplash.com/photo-1593115057322-e94b77572f20?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Economie nieuws">
+                    <div class="side-article-content">
+                        <h3>Beurs sluit hoger na positieve cijfers</h3>
+                        <p>De AEX sloot vandaag 1,2% hoger na het uitkomen van betere dan verwachte economische cijfers.</p>
+                    </div>
+                </div>
             </div>
         </section>
         
+        <!-- Sinterklaas Section -->
+        <section class="sinterklaas-section" id="sintSection">
+            <div class="section-header">
+                <h2>Sinterklaas Nieuws</h2>
+                <a href="sintnieuws.html">Bekijk alle Sinterklaas nieuws</a>
+            </div>
+            
+            <div class="sint-progress">
+                <h3>Voortgang Sinterklaas</h3>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+                <div class="progress-text">
+                    <span>Vertrek uit Spanje</span>
+                    <span id="progressPercentage">45%</span>
+                    <span>Aankomst in Nederland</span>
+                </div>
+            </div>
+            
+            <div class="news-grid">
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1574359411659-619d8d6cac2a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Sinterklaas vertrekt">
+                    <div class="news-card-content">
+                        <h3>Sinterklaas vertrekt uit Spanje</h3>
+                        <p>Sinterklaas en zijn pieten zijn begonnen aan de lange reis naar Nederland.</p>
+                        <a href="sintnieuws.html#artikel1">Lees verder</a>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1502602898536-47ad22581b52?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Sinterklaas in Frankrijk">
+                    <div class="news-card-content">
+                        <h3>Eerste tussenstop in Frankrijk</h3>
+                        <p>Sinterklaas maakt een tussenstop in Frankrijk om pepernoten in te slaan.</p>
+                        <a href="sintnieuws.html#artikel2">Lees verder</a>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1512389142860-9c449e58a543?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pieten oefenen">
+                    <div class="news-card-content">
+                        <h3>Pieten oefenen met daken lopen</h3>
+                        <p>De pieten zijn hard aan het oefenen om straks goed over de daken te kunnen lopen.</p>
+                        <a href="sintnieuws.html#artikel3">Lees verder</a>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1574263867128-a3d5c1b1deae?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Sinterklaas nadert Nederland">
+                    <div class="news-card-content">
+                        <h3>Sinterklaas nadert Nederland</h3>
+                        <p>De intocht van Sinterklaas komt steeds dichterbij. De voorbereidingen zijn in volle gang.</p>
+                        <a href="sintnieuws.html#artikel4">Lees verder</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Latest News Section -->
         <section class="news-section">
-            <h2>Laatste Sinterklaas Nieuws</h2>
-            
-            <div class="progress-bar">
-                <div class="progress" id="sinterklaasProgress"></div>
-            </div>
-            <div class="progress-text">
-                <span>Vertrek uit Spanje</span>
-                <span id="currentProgress">0%</span>
-                <span>Aankomst in Nederland</span>
+            <div class="section-header">
+                <h2>Laatste Nieuws</h2>
+                <a href="#">Meer nieuws</a>
             </div>
             
-            <div class="news-grid" id="newsContainer">
-                <!-- Nieuwsberichten worden hier ingevoegd via JavaScript -->
+            <div class="news-grid">
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Verkeer nieuws">
+                    <div class="news-card-content">
+                        <h3>Fileprobleem op A2 opgelost</h3>
+                        <p>Na uren vertraging is de file op de A2 eindelijk opgelost. De weg is weer vrij.</p>
+                        <a href="#">Lees verder</a>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1551135049-8a33b42738b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Onderwijs nieuws">
+                    <div class="news-card-content">
+                        <h3>Scholen krijgen meer budget voor digitalisering</h3>
+                        <p>Het ministerie van Onderwijs trekt extra geld uit voor digitale leermiddelen.</p>
+                        <a href="#">Lees verder</a>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Gezondheid nieuws">
+                    <div class="news-card-content">
+                        <h3>Nieuw medicijn goedgekeurd voor zeldzame ziekte</h3>
+                        <p>Het Europese geneesmiddelenbureau heeft een nieuw medicijn goedgekeurd voor een zeldzame ziekte.</p>
+                        <a href="#">Lees verder</a>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1535016120720-40c646be5580?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Cultuur nieuws">
+                    <div class="news-card-content">
+                        <h3>Museum trekt recordaantal bezoekers</h3>
+                        <p>Het populaire museum heeft dit jaar al meer dan een miljoen bezoekers getrokken.</p>
+                        <a href="#">Lees verder</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sports Section -->
+        <section class="news-section">
+            <div class="section-header">
+                <h2>Sport</h2>
+                <a href="#">Meer sport</a>
+            </div>
+            
+            <div class="news-grid">
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Voetbal nieuws">
+                    <div class="news-card-content">
+                        <h3>Nederlands elftal wint belangrijke kwalificatiewedstrijd</h3>
+                        <p>Oranje heeft een belangrijke overwinning geboekt in de kwalificatiereeks voor het EK.</p>
+                        <a href="#">Lees verder</a>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Atletiek nieuws">
+                    <div class="news-card-content">
+                        <h3>Nederlandse atleet verbetert nationaal record</h3>
+                        <p>De Nederlandse atleet heeft tijdens een internationale wedstrijd een nieuw nationaal record gevestigd.</p>
+                        <a href="#">Lees verder</a>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Basketbal nieuws">
+                    <div class="news-card-content">
+                        <h3>Nederlands basketbalteam naar volgende ronde</h3>
+                        <p>Het Nederlands basketbalteam heeft zich geplaatst voor de volgende ronde van het EK.</p>
+                        <a href="#">Lees verder</a>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Wielrennen nieuws">
+                    <div class="news-card-content">
+                        <h3>Nederlandse wielrenner wint etappe in Grote Ronde</h3>
+                        <p>De Nederlandse wielrenner heeft een spectaculaire etappe gewonnen in een van de grote rondes.</p>
+                        <a href="#">Lees verder</a>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
     
     <footer>
-        <p>© 2023 Sinterklaas Nieuws - Volg de reis van Sinterklaas naar Nederland</p>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Nu.nl</h3>
+                <ul>
+                    <li><a href="#">Over ons</a></li>
+                    <li><a href="#">Vacatures</a></li>
+                    <li><a href="#">Adverteren</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Service</h3>
+                <ul>
+                    <li><a href="#">Mijn Nu.nl</a></li>
+                    <li><a href="#">Nieuwsbrieven</a></li>
+                    <li><a href="#">Nu LIVE</a></li>
+                    <li><a href="#">RSS</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Volg ons</h3>
+                <ul>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Juridisch</h3>
+                <ul>
+                    <li><a href="#">Algemene voorwaarden</a></li>
+                    <li><a href="#">Privacybeleid</a></li>
+                    <li><a href="#">Cookiebeleid</a></li>
+                    <li><a href="#">Herroepingsrecht</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2023 nu.nl - Alle rechten voorbehouden</p>
+        </div>
     </footer>
 
     <script>
-        // Nieuwsberichten database - gesorteerd op datum
-        const newsItems = [
-            {
-                date: "2023-11-01",
-                title: "Sinterklaas vertrekt uit Spanje",
-                summary: "Sinterklaas en zijn pieten zijn begonnen aan de lange reis naar Nederland.",
-                image: "https://images.unsplash.com/photo-1574359411659-619d8d6cac2a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-                fullText: "Vandaag is het zover! Sinterklaas is vertrokken uit zijn zonnige paleis in Spanje. Samen met zijn pieten heeft hij de stoomboot volgeladen met cadeaus voor alle kinderen in Nederland en België. De reis zal ongeveer twee weken duren, met tussenstops bij verschillende landen."
-            },
-            {
-                date: "2023-11-05",
-                title: "Eerste tussenstop in Frankrijk",
-                summary: "Sinterklaas maakt een tussenstop in Frankrijk om pepernoten in te slaan.",
-                image: "https://images.unsplash.com/photo-1502602898536-47ad22581b52?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-                fullText: "Na enkele dagen varen heeft de stoomboot van Sinterklaas de Franse kust bereikt. Hier worden extra voorraden pepernoten en chocoladeletters ingeslagen. De pieten hebben ook even de tijd om uit te rusten voordat ze verder varen naar het noorden."
-            },
-            {
-                date: "2023-11-10",
-                title: "Pieten oefenen met daken lopen",
-                summary: "De pieten zijn hard aan het oefenen om straks goed over de daken te kunnen lopen.",
-                image: "https://images.unsplash.com/photo-1512389142860-9c449e58a543?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-                fullText: "Terwijl Sinterklaas de route bestudeert, zijn de pieten druk aan het oefenen. Ze moeten in topvorm zijn om straks over alle daken te kunnen lopen. Het is belangrijk dat ze geen enkel huis overslaan en alle schoenen vinden."
-            },
-            {
-                date: "2023-11-15",
-                title: "Sinterklaas nadert Nederland",
-                summary: "De intocht van Sinterklaas komt steeds dichterbij. De voorbereidingen zijn in volle gang.",
-                image: "https://images.unsplash.com/photo-1574263867128-a3d5c1b1deae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-                fullText: "Nog maar een paar dagen en dan zal Sinterklaas aankomen in Nederland! In alle steden zijn de voorbereidingen voor de intocht in volle gang. De pieten repeteren hun acts en controleren of alle daken veilig zijn."
-            },
-            {
-                date: "2023-11-18",
-                title: "Sinterklaas intocht morgen!",
-                summary: "Morgen is het zover: de intocht van Sinterklaas in Nederland!",
-                image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-                fullText: "De spanning loopt op! Morgen zal Sinterklaas officieel aankomen in Nederland. Hij komt dit jaar aan in de stad [stadnaam]. Er worden duizenden toeschouwers verwacht. De pieten hebben al aangegeven dat ze een spectaculaire show hebben voorbereid."
-            },
-            {
-                date: "2023-11-19",
-                title: "Sinterklaas is in het land!",
-                summary: "Vandaag is de intocht van Sinterklaas. Hij is officieel aangekomen in Nederland!",
-                image: "https://images.unsplash.com/photo-1574263867128-a3d5c1b1deae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-                fullText: "Hoera! Sinterklaas is vandaag aangekomen in Nederland! Duizenden kinderen hebben hem uitgezwaaid tijdens de intocht. Nu kan het echte werk beginnen: cadeaus uitdelen aan alle brave kinderen."
-            },
-            {
-                date: "2023-12-05",
-                title: "Pakjesavond!",
-                summary: "Vandaag is het pakjesavond! Sinterklaas en zijn pieten zijn de hele nacht bezig.",
-                image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-                fullText: "Het is zover! Vandaag is pakjesavond. Sinterklaas en zijn pieten zijn de hele nacht bezig om bij alle kinderen langs te gaan. Zorg dat je schoen staat en dat je wat wortels voor het paard hebt klaargezet!"
-            },
-            {
-                date: "2023-12-06",
-                title: "Sinterklaas vertrekt weer",
-                summary: "Na een geslaagd bezoek vertrekt Sinterklaas weer naar Spanje.",
-                image: "https://images.unsplash.com/photo-1574359411659-619d8d6cac2a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-                fullText: "Met een boot vol lege zakken en tevreden herinnering vertrekt Sinterklaas weer naar Spanje. Het was een geslaagd bezoek en hij kijkt nu al uit naar volgend jaar. Tot dan, Sinterklaas!"
-            }
-        ];
-
-        // Functie om datum in Nederlands formaat weer te geven
-        function formatDate(date) {
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            return date.toLocaleDateString('nl-NL', options);
-        }
-
-        // Huidige datum weergeven
-        const currentDate = new Date();
-        document.getElementById('currentDate').textContent = `Vandaag is het ${formatDate(currentDate)}`;
-
-        // Bepaal het nieuwsbericht voor vandaag
-        const todayStr = currentDate.toISOString().split('T')[0];
-        let todayNews = null;
-
-        // Zoek het bericht voor vandaag of het laatste beschikbare bericht
-        for (let i = newsItems.length - 1; i >= 0; i--) {
-            if (newsItems[i].date <= todayStr) {
-                todayNews = newsItems[i];
-                break;
-            }
-        }
-
-        // Als er geen bericht voor vandaag is, gebruik het laatste bericht
-        if (!todayNews) {
-            todayNews = newsItems[newsItems.length - 1];
-        }
-
-        // Vul het featured artikel in
-        document.getElementById('featuredImage').src = todayNews.image;
-        document.getElementById('featuredTitle').textContent = todayNews.title;
-        document.getElementById('featuredText').textContent = todayNews.summary;
-
-        // Voeg alle nieuwsberichten toe die vandaag of eerder zijn
-        const newsContainer = document.getElementById('newsContainer');
-        newsItems.forEach(item => {
-            if (item.date <= todayStr) {
-                const newsCard = document.createElement('div');
-                newsCard.className = 'news-card';
-                newsCard.innerHTML = `
-                    <img src="${item.image}" alt="${item.title}" class="news-image">
-                    <div class="news-content">
-                        <div class="news-date">${formatDate(new Date(item.date))}</div>
-                        <h3>${item.title}</h3>
-                        <p>${item.summary}</p>
-                        <a href="dagbericht.html?date=${item.date}" class="card-link">Lees verder →</a>
-                    </div>
-                `;
-                newsContainer.appendChild(newsCard);
+        // Toggle Sinterklaas section
+        document.getElementById('sintToggle').addEventListener('click', function() {
+            const sintSection = document.getElementById('sintSection');
+            sintSection.classList.toggle('active');
+            
+            // Change button text based on state
+            if (sintSection.classList.contains('active')) {
+                this.textContent = 'Verberg Sinterklaas nieuws';
+            } else {
+                this.textContent = 'Sinterklaas nieuws';
             }
         });
-
-        // Bereken de voortgang van Sinterklaas
-        const startDate = new Date('2023-11-01');
-        const endDate = new Date('2023-12-05');
-        const totalDays = (endDate - startDate) / (1000 * 60 * 60 * 24);
-        const daysPassed = (currentDate - startDate) / (1000 * 60 * 60 * 24);
         
-        let progressPercentage = Math.min(100, Math.max(0, (daysPassed / totalDays) * 100));
-        
-        // Als we na 5 december zijn, toon 100%
-        if (currentDate > endDate) {
-            progressPercentage = 100;
+        // Calculate Sinterklaas progress
+        function updateSinterklaasProgress() {
+            const startDate = new Date('2023-11-01');
+            const endDate = new Date('2023-12-05');
+            const currentDate = new Date();
+            
+            const totalDays = (endDate - startDate) / (1000 * 60 * 60 * 24);
+            const daysPassed = (currentDate - startDate) / (1000 * 60 * 60 * 24);
+            
+            let progressPercentage = Math.min(100, Math.max(0, (daysPassed / totalDays) * 100));
+            
+            // If we're after December 5th, show 100%
+            if (currentDate > endDate) {
+                progressPercentage = 100;
+            }
+            
+            document.querySelector('.progress').style.width = `${progressPercentage}%`;
+            document.getElementById('progressPercentage').textContent = `${Math.round(progressPercentage)}%`;
         }
         
-        document.getElementById('sinterklaasProgress').style.width = `${progressPercentage}%`;
-        document.getElementById('currentProgress').textContent = `${Math.round(progressPercentage)}%`;
-
-        // Sla de nieuwsberichten op in localStorage voor gebruik op de detailpagina
-        localStorage.setItem('sinterklaasNews', JSON.stringify(newsItems));
+        // Update progress on page load
+        updateSinterklaasProgress();
     </script>
 </body>
 </html>
