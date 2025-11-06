@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dagbericht - Sinterklaas Nieuws</title>
+    <style>
+        :root {
+            --primary-red: #C8102E;
+            --secondary-red: #E4002B;
+            --gold: #FFD700;
+            --dark-blue: #1E3A8A;
+            --light-bg: #F8F9FA;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-red), var(--dark-blue));
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .logo h1 {
+            font-size: 2rem;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 2.5rem;
+        }
+        
+        .back-link {
+            color: white;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .article-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+        
+        .article-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+        
+        .article-content {
+            padding: 2rem;
+        }
+        
+        .article-date {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .article-content h1 {
+            color: var(--primary-red);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .article-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        footer {
+            background-color: var(--dark-blue);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .article-image {
+                height: 250px;
+            }
+            
+            .article-content h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <div class="logo-icon">🎅</div>
+            <h1>Sinterklaas Nieuws</h1>
+        </div>
+        <a href="index.html" class="back-link">← Terug naar overzicht</a>
+    </header>
+    
+    <main>
+        <div class="article-container">
+            <img id="articleImage" class="article-image" src="" alt="Sinterklaas nieuws">
+            <div class="article-content">
+                <div class="article-date" id="articleDate">Datum</div>
+                <h1 id="articleTitle">Titel van het artikel</h1>
+                <p id="articleText">Inhoud van het artikel...</p>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>© 2023 Sinterklaas Nieuws - Volg de reis van Sinterklaas naar Nederland</p>
+    </footer>
+
+    <script>
+        // Haal de datum parameter uit de URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const articleDate = urlParams.get('date');
+        
+        // Haal de nieuwsberichten op uit localStorage
+        const newsItems = JSON.parse(localStorage.getItem('sinterklaasNews')) || [];
+        
+        // Zoek het juiste artikel
+        let article = null;
+        if (articleDate) {
+            article = newsItems.find(item => item.date === articleDate);
+        }
+        
+        // Als er geen artikel gevonden is, gebruik het eerste artikel
+        if (!article && newsItems.length > 0) {
+            article = newsItems[0];
+        }
+        
+        // Vul de pagina in met artikelgegevens
+        if (article) {
+            document.getElementById('articleImage').src = article.image;
+            document.getElementById('articleTitle').textContent = article.title;
+            document.getElementById('articleText').textContent = article.fullText;
+            
+            // Formatteer de datum
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = new Date(article.date).toLocaleDateString('nl-NL', options);
+            document.getElementById('articleDate').textContent = formattedDate;
+        } else {
+            document.getElementById('articleTitle').textContent = "Artikel niet gevonden";
+            document.getElementById('articleText').textContent = "Het opgevraagde artikel kon niet worden gevonden.";
+        }
+    </script>
+</body>
+</html>
