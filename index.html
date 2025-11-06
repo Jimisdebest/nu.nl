@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sinterklaas Nieuws - Volg de Reis</title>
+    <style>
+        :root {
+            --primary-red: #C8102E;
+            --secondary-red: #E4002B;
+            --gold: #FFD700;
+            --dark-blue: #1E3A8A;
+            --light-bg: #F8F9FA;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-red), var(--dark-blue));
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .logo h1 {
+            font-size: 2.5rem;
+            margin-left: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .logo-icon {
+            font-size: 3rem;
+        }
+        
+        .date-display {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+            opacity: 0.9;
+        }
+        
+        .featured-article {
+            background-color: white;
+            margin: 2rem auto;
+            max-width: 1200px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+        
+        .featured-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+        
+        .featured-content {
+            padding: 2rem;
+        }
+        
+        .featured-content h2 {
+            color: var(--primary-red);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .featured-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .read-more {
+            display: inline-block;
+            background-color: var(--primary-red);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .read-more:hover {
+            background-color: var(--dark-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .news-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem 3rem;
+        }
+        
+        .news-section h2 {
+            color: var(--dark-blue);
+            font-size: 1.8rem;
+            margin: 2rem 0 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--gold);
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .news-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .news-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .news-content {
+            padding: 1.2rem;
+        }
+        
+        .news-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .news-content h3 {
+            color: var(--primary-red);
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+        }
+        
+        .news-content p {
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        
+        .card-link {
+            color: var(--dark-blue);
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .card-link:hover {
+            text-decoration: underline;
+        }
+        
+        footer {
+            background-color: var(--dark-blue);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 2rem;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-red), var(--gold));
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .logo h1 {
+                font-size: 1.8rem;
+            }
+            
+            .featured-image {
+                height: 250px;
+            }
+            
+            .featured-content h2 {
+                font-size: 1.6rem;
+            }
+            
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <div class="logo-icon">🎅</div>
+            <h1>Sinterklaas Nieuws</h1>
+        </div>
+        <p class="date-display" id="currentDate">Vandaag is het ...</p>
+    </header>
+    
+    <main>
+        <section class="featured-article">
+            <img id="featuredImage" class="featured-image" src="" alt="Sinterklaas nieuws">
+            <div class="featured-content">
+                <h2 id="featuredTitle">Onderwerp van de dag</h2>
+                <p id="featuredText">Beschrijving van het dagelijkse onderwerp over Sinterklaas.</p>
+                <a href="dagbericht.html" class="read-more">Lees het volledige bericht</a>
+            </div>
+        </section>
+        
+        <section class="news-section">
+            <h2>Laatste Sinterklaas Nieuws</h2>
+            
+            <div class="progress-bar">
+                <div class="progress" id="sinterklaasProgress"></div>
+            </div>
+            <div class="progress-text">
+                <span>Vertrek uit Spanje</span>
+                <span id="currentProgress">0%</span>
+                <span>Aankomst in Nederland</span>
+            </div>
+            
+            <div class="news-grid" id="newsContainer">
+                <!-- Nieuwsberichten worden hier ingevoegd via JavaScript -->
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>© 2023 Sinterklaas Nieuws - Volg de reis van Sinterklaas naar Nederland</p>
+    </footer>
+
+    <script>
+        // Nieuwsberichten database - gesorteerd op datum
+        const newsItems = [
+            {
+                date: "2023-11-01",
+                title: "Sinterklaas vertrekt uit Spanje",
+                summary: "Sinterklaas en zijn pieten zijn begonnen aan de lange reis naar Nederland.",
+                image: "https://images.unsplash.com/photo-1574359411659-619d8d6cac2a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+                fullText: "Vandaag is het zover! Sinterklaas is vertrokken uit zijn zonnige paleis in Spanje. Samen met zijn pieten heeft hij de stoomboot volgeladen met cadeaus voor alle kinderen in Nederland en België. De reis zal ongeveer twee weken duren, met tussenstops bij verschillende landen."
+            },
+            {
+                date: "2023-11-05",
+                title: "Eerste tussenstop in Frankrijk",
+                summary: "Sinterklaas maakt een tussenstop in Frankrijk om pepernoten in te slaan.",
+                image: "https://images.unsplash.com/photo-1502602898536-47ad22581b52?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+                fullText: "Na enkele dagen varen heeft de stoomboot van Sinterklaas de Franse kust bereikt. Hier worden extra voorraden pepernoten en chocoladeletters ingeslagen. De pieten hebben ook even de tijd om uit te rusten voordat ze verder varen naar het noorden."
+            },
+            {
+                date: "2023-11-10",
+                title: "Pieten oefenen met daken lopen",
+                summary: "De pieten zijn hard aan het oefenen om straks goed over de daken te kunnen lopen.",
+                image: "https://images.unsplash.com/photo-1512389142860-9c449e58a543?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+                fullText: "Terwijl Sinterklaas de route bestudeert, zijn de pieten druk aan het oefenen. Ze moeten in topvorm zijn om straks over alle daken te kunnen lopen. Het is belangrijk dat ze geen enkel huis overslaan en alle schoenen vinden."
+            },
+            {
+                date: "2023-11-15",
+                title: "Sinterklaas nadert Nederland",
+                summary: "De intocht van Sinterklaas komt steeds dichterbij. De voorbereidingen zijn in volle gang.",
+                image: "https://images.unsplash.com/photo-1574263867128-a3d5c1b1deae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+                fullText: "Nog maar een paar dagen en dan zal Sinterklaas aankomen in Nederland! In alle steden zijn de voorbereidingen voor de intocht in volle gang. De pieten repeteren hun acts en controleren of alle daken veilig zijn."
+            },
+            {
+                date: "2023-11-18",
+                title: "Sinterklaas intocht morgen!",
+                summary: "Morgen is het zover: de intocht van Sinterklaas in Nederland!",
+                image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+                fullText: "De spanning loopt op! Morgen zal Sinterklaas officieel aankomen in Nederland. Hij komt dit jaar aan in de stad [stadnaam]. Er worden duizenden toeschouwers verwacht. De pieten hebben al aangegeven dat ze een spectaculaire show hebben voorbereid."
+            },
+            {
+                date: "2023-11-19",
+                title: "Sinterklaas is in het land!",
+                summary: "Vandaag is de intocht van Sinterklaas. Hij is officieel aangekomen in Nederland!",
+                image: "https://images.unsplash.com/photo-1574263867128-a3d5c1b1deae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+                fullText: "Hoera! Sinterklaas is vandaag aangekomen in Nederland! Duizenden kinderen hebben hem uitgezwaaid tijdens de intocht. Nu kan het echte werk beginnen: cadeaus uitdelen aan alle brave kinderen."
+            },
+            {
+                date: "2023-12-05",
+                title: "Pakjesavond!",
+                summary: "Vandaag is het pakjesavond! Sinterklaas en zijn pieten zijn de hele nacht bezig.",
+                image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+                fullText: "Het is zover! Vandaag is pakjesavond. Sinterklaas en zijn pieten zijn de hele nacht bezig om bij alle kinderen langs te gaan. Zorg dat je schoen staat en dat je wat wortels voor het paard hebt klaargezet!"
+            },
+            {
+                date: "2023-12-06",
+                title: "Sinterklaas vertrekt weer",
+                summary: "Na een geslaagd bezoek vertrekt Sinterklaas weer naar Spanje.",
+                image: "https://images.unsplash.com/photo-1574359411659-619d8d6cac2a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+                fullText: "Met een boot vol lege zakken en tevreden herinnering vertrekt Sinterklaas weer naar Spanje. Het was een geslaagd bezoek en hij kijkt nu al uit naar volgend jaar. Tot dan, Sinterklaas!"
+            }
+        ];
+
+        // Functie om datum in Nederlands formaat weer te geven
+        function formatDate(date) {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            return date.toLocaleDateString('nl-NL', options);
+        }
+
+        // Huidige datum weergeven
+        const currentDate = new Date();
+        document.getElementById('currentDate').textContent = `Vandaag is het ${formatDate(currentDate)}`;
+
+        // Bepaal het nieuwsbericht voor vandaag
+        const todayStr = currentDate.toISOString().split('T')[0];
+        let todayNews = null;
+
+        // Zoek het bericht voor vandaag of het laatste beschikbare bericht
+        for (let i = newsItems.length - 1; i >= 0; i--) {
+            if (newsItems[i].date <= todayStr) {
+                todayNews = newsItems[i];
+                break;
+            }
+        }
+
+        // Als er geen bericht voor vandaag is, gebruik het laatste bericht
+        if (!todayNews) {
+            todayNews = newsItems[newsItems.length - 1];
+        }
+
+        // Vul het featured artikel in
+        document.getElementById('featuredImage').src = todayNews.image;
+        document.getElementById('featuredTitle').textContent = todayNews.title;
+        document.getElementById('featuredText').textContent = todayNews.summary;
+
+        // Voeg alle nieuwsberichten toe die vandaag of eerder zijn
+        const newsContainer = document.getElementById('newsContainer');
+        newsItems.forEach(item => {
+            if (item.date <= todayStr) {
+                const newsCard = document.createElement('div');
+                newsCard.className = 'news-card';
+                newsCard.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}" class="news-image">
+                    <div class="news-content">
+                        <div class="news-date">${formatDate(new Date(item.date))}</div>
+                        <h3>${item.title}</h3>
+                        <p>${item.summary}</p>
+                        <a href="dagbericht.html?date=${item.date}" class="card-link">Lees verder →</a>
+                    </div>
+                `;
+                newsContainer.appendChild(newsCard);
+            }
+        });
+
+        // Bereken de voortgang van Sinterklaas
+        const startDate = new Date('2023-11-01');
+        const endDate = new Date('2023-12-05');
+        const totalDays = (endDate - startDate) / (1000 * 60 * 60 * 24);
+        const daysPassed = (currentDate - startDate) / (1000 * 60 * 60 * 24);
+        
+        let progressPercentage = Math.min(100, Math.max(0, (daysPassed / totalDays) * 100));
+        
+        // Als we na 5 december zijn, toon 100%
+        if (currentDate > endDate) {
+            progressPercentage = 100;
+        }
+        
+        document.getElementById('sinterklaasProgress').style.width = `${progressPercentage}%`;
+        document.getElementById('currentProgress').textContent = `${Math.round(progressPercentage)}%`;
+
+        // Sla de nieuwsberichten op in localStorage voor gebruik op de detailpagina
+        localStorage.setItem('sinterklaasNews', JSON.stringify(newsItems));
+    </script>
+</body>
+</html>
