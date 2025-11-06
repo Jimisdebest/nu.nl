@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sinterklaas Nieuws - nu.nl</title>
+    <style>
+        :root {
+            --nu-red: #CC0000;
+            --nu-dark-red: #990000;
+            --nu-gray: #F5F5F5;
+            --nu-dark-gray: #333333;
+            --nu-border: #E5E5E5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-color: white;
+            color: var(--nu-dark-gray);
+            line-height: 1.5;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            border-bottom: 1px solid var(--nu-border);
+            padding: 10px 0;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--nu-red);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--nu-dark-gray);
+            font-weight: bold;
+        }
+        
+        .nav-links a:hover {
+            color: var(--nu-red);
+        }
+        
+        .back-button {
+            background-color: var(--nu-red);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .back-button:hover {
+            background-color: var(--nu-dark-red);
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .page-header {
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: var(--nu-red);
+            margin-bottom: 10px;
+        }
+        
+        .page-header p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+        
+        .sint-progress {
+            background-color: var(--nu-gray);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #CC0000, #FFD700);
+            border-radius: 5px;
+            width: 45%;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .news-article {
+            margin: 40px 0;
+            border-bottom: 1px solid var(--nu-border);
+            padding-bottom: 30px;
+        }
+        
+        .news-article:last-child {
+            border-bottom: none;
+        }
+        
+        .article-header {
+            margin-bottom: 20px;
+        }
+        
+        .article-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .article-header h2 {
+            font-size: 1.8rem;
+            color: var(--nu-red);
+        }
+        
+        .article-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .article-content p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--nu-gray);
+            padding: 40px 0;
+            margin-top: 40px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        
+        .footer-column h3 {
+            color: var(--nu-red);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-column a {
+            text-decoration: none;
+            color: var(--nu-dark-gray);
+        }
+        
+        .footer-column a:hover {
+            color: var(--nu-red);
+        }
+        
+        .copyright {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid var(--nu-border);
+            margin-top: 30px;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">nu.nl</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Voorpagina</a></li>
+                <li><a href="#">Laatste nieuws</a></li>
+                <li><a href="#">Sport</a></li>
+                <li><a href="#">Tech</a></li>
+            </ul>
+            <a href="index.html" class="back-button">Terug naar voorpagina</a>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="page-header">
+            <h1>Sinterklaas Nieuws</h1>
+            <p>Volg de reis van Sinterklaas naar Nederland</p>
+        </div>
+        
+        <div class="sint-progress">
+            <h3>Voortgang Sinterklaas</h3>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <div class="progress-text">
+                <span>Vertrek uit Spanje</span>
+                <span id="progressPercentage">45%</span>
+                <span>Aankomst in Nederland</span>
+            </div>
+        </div>
+        
+        <article class="news-article" id="artikel1">
+            <div class="article-header">
+                <div class="article-date">1 november 2023</div>
+                <h2>Sinterklaas vertrekt uit Spanje</h2>
+            </div>
+            <img src="https://images.unsplash.com/photo-1574359411659-619d8d6cac2a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Sinterklaas vertrekt" class="article-image">
+            <div class="article-content">
+                <p>Vandaag is het zover! Sinterklaas is vertrokken uit zijn zonnige paleis in Spanje. Samen met zijn pieten heeft hij de stoomboot volgeladen met cadeaus voor alle kinderen in Nederland en België.</p>
+                <p>De reis zal ongeveer twee weken duren, met tussenstops bij verschillende landen. De pieten zijn al druk bezig met het controleren van de voorraden pepernoten en chocoladeletters.</p>
+                <p>"We hebben er weer zin in", zegt Hoofdpiet. "Het wordt een mooie reis en we kijken er naar uit om alle kinderen weer te verrassen."</p>
+                <p>Verwacht wordt dat Sinterklaas rond half november zal aankomen in Nederland. De exacte datum van de intocht wordt traditioneel pas later bekendgemaakt.</p>
+            </div>
+        </article>
+        
+        <article class="news-article" id="artikel2">
+            <div class="article-header">
+                <div class="article-date">5 november 2023</div>
+                <h2>Eerste tussenstop in Frankrijk</h2>
+            </div>
+            <img src="https://images.unsplash.com/photo-1502602898536-47ad22581b52?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Sinterklaas in Frankrijk" class="article-image">
+            <div class="article-content">
+                <p>Na enkele dagen varen heeft de stoomboot van Sinterklaas de Franse kust bereikt. Hier worden extra voorraden pepernoten en chocoladeletters ingeslagen.</p>
+                <p>De pieten hebben ook even de tijd om uit te rusten voordat ze verder varen naar het noorden. "Frankrijk is altijd een mooie tussenstop", vertelt een van de pieten. "We kunnen hier even bijkomen en nieuwe krachten opdoen voor de rest van de reis."</p>
+                <p>Sinterklaas zelf gebruikt de stop om zijn grote boek nog eens goed door te nemen. Hij controleert of alle kinderen netjes in het boek staan en of hij niemand over het hoofd heeft gezien.</p>
+                <p>Na een dag rust zal de reis worden voortgezet. De volgende stop is waarschijnlijk ergens in België, waar Sinterklaas traditioneel ook even halt houdt.</p>
+            </div>
+        </article>
+        
+        <article class="news-article" id="artikel3">
+            <div class="article-header">
+                <div class="article-date">10 november 2023</div>
+                <h2>Pieten oefenen met daken lopen</h2>
+            </div>
+            <img src="https://images.unsplash.com/photo-1512389142860-9c449e58a543?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Pieten oefenen" class="article-image">
+            <div class="article-content">
+                <p>Terwijl Sinterklaas de route bestudeert, zijn de pieten druk aan het oefenen. Ze moeten in topvorm zijn om straks over alle daken te kunnen lopen.</p>
+                <p>Het is belangrijk dat ze geen enkel huis overslaan en alle schoenen vinden. Daarom oefenen ze op het dek van de stoomboot met verschillende soorten daken en schoorstenen.</p>
+                <p>"We hebben speciale trainingsoefeningen", legt Hoofdpiet uit. "We oefenen met balans, snelheid en natuurlijk het vinden van de juiste schoorsteen. Elk huis is anders, dus we moeten voorbereid zijn op alles."</p>
+                <p>Ook het inpakken van de cadeaus wordt alvast geoefend. De pieten willen ervoor zorgen dat alle pakjes netjes en op tijd klaar zijn voor pakjesavond.</p>
+            </div>
+        </article>
+        
+        <article class="news-article" id="artikel4">
+            <div class="article-header">
+                <div class="article-date">15 november 2023</div>
+                <h2>Sinterklaas nadert Nederland</h2>
+            </div>
+            <img src="https://images.unsplash.com/photo-1574263867128-a3d5c1b1deae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Sinterklaas nadert Nederland" class="article-image">
+            <div class="article-content">
+                <p>Nog maar een paar dagen en dan zal Sinterklaas aankomen in Nederland! In alle steden zijn de voorbereidingen voor de intocht in volle gang.</p>
+                <p>De pieten repeteren hun acts en controleren of alle daken veilig zijn. Ook wordt er hard gewerkt aan de aankleding van de steden waar Sinterklaas dit jaar zal arriveren.</p>
+                <p>"We kijken er enorm naar uit", zegt een woordvoerder van de intochtorganisatie. "Het wordt een spectaculaire intocht met veel verrassingen voor de kinderen."</p>
+                <p>Ondertussen bereiden veel kinderen zich voor op het zetten van hun schoen. Traditioneel zetten kinderen vanaf de intocht hun schoen, in de hoop dat Sinterklaas er iets lekkers in doet.</p>
+                <p>De exacte datum en locatie van de intocht worden zoals altijd pas op het laatste moment bekendgemaakt, om de verrassing zo groot mogelijk te houden.</p>
+            </div>
+        </article>
+    </main>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Nu.nl</h3>
+                <ul>
+                    <li><a href="#">Over ons</a></li>
+                    <li><a href="#">Vacatures</a></li>
+                    <li><a href="#">Adverteren</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Service</h3>
+                <ul>
+                    <li><a href="#">Mijn Nu.nl</a></li>
+                    <li><a href="#">Nieuwsbrieven</a></li>
+                    <li><a href="#">Nu LIVE</a></li>
+                    <li><a href="#">RSS</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Volg ons</h3>
+                <ul>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Juridisch</h3>
+                <ul>
+                    <li><a href="#">Algemene voorwaarden</a></li>
+                    <li><a href="#">Privacybeleid</a></li>
+                    <li><a href="#">Cookiebeleid</a></li>
+                    <li><a href="#">Herroepingsrecht</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2023 nu.nl - Alle rechten voorbehouden</p>
+        </div>
+    </footer>
+
+    <script>
+        // Calculate Sinterklaas progress
+        function updateSinterklaasProgress() {
+            const startDate = new Date('2023-11-01');
+            const endDate = new Date('2023-12-05');
+            const currentDate = new Date();
+            
+            const totalDays = (endDate - startDate) / (1000 * 60 * 60 * 24);
+            const daysPassed = (currentDate - startDate) / (1000 * 60 * 60 * 24);
+            
+            let progressPercentage = Math.min(100, Math.max(0, (daysPassed / totalDays) * 100));
+            
+            // If we're after December 5th, show 100%
+            if (currentDate > endDate) {
+                progressPercentage = 100;
+            }
+            
+            document.querySelector('.progress').style.width = `${progressPercentage}%`;
+            document.getElementById('progressPercentage').textContent = `${Math.round(progressPercentage)}%`;
+        }
+        
+        // Update progress on page load
+        updateSinterklaasProgress();
+    </script>
+</body>
+</html>
