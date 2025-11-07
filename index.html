@@ -42,10 +42,14 @@
             padding: 0 20px;
         }
         
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
         .logo {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--nu-red);
+            height: 40px;
+            width: auto;
         }
         
         .nav-links {
@@ -76,6 +80,8 @@
             font-weight: bold;
             cursor: pointer;
             transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
         }
         
         .sint-button:hover {
@@ -237,11 +243,6 @@
             padding: 30px;
             border-radius: 8px;
             margin: 40px 0;
-            display: none;
-        }
-        
-        .sinterklaas-section.active {
-            display: block;
         }
         
         .sint-progress {
@@ -362,7 +363,9 @@
 <body>
     <header>
         <div class="header-container">
-            <div class="logo">nu.nl</div>
+            <div class="logo-container">
+                <img src="https://nieuwejournalistiek.nl/app/uploads/sites/38/2017/02/nu-logo.jpg" alt="nu.nl" class="logo">
+            </div>
             <ul class="nav-links">
                 <li><a href="#">Voorpagina</a></li>
                 <li><a href="#">Laatste nieuws</a></li>
@@ -371,7 +374,7 @@
                 <li><a href="#">Economie</a></li>
                 <li><a href="#">Entertainment</a></li>
             </ul>
-            <button class="sint-button" id="sintToggle">Sinterklaas nieuws</button>
+            <a href="sintnieuws.html" class="sint-button">Sinterklaas nieuws</a>
         </div>
     </header>
     
@@ -414,7 +417,7 @@
         </section>
         
         <!-- Sinterklaas Section -->
-        <section class="sinterklaas-section" id="sintSection">
+        <section class="sinterklaas-section">
             <div class="section-header">
                 <h2>Sinterklaas Nieuws</h2>
                 <a href="sintnieuws.html">Bekijk alle Sinterklaas nieuws</a>
@@ -613,19 +616,6 @@
     </footer>
 
     <script>
-        // Toggle Sinterklaas section
-        document.getElementById('sintToggle').addEventListener('click', function() {
-            const sintSection = document.getElementById('sintSection');
-            sintSection.classList.toggle('active');
-            
-            // Change button text based on state
-            if (sintSection.classList.contains('active')) {
-                this.textContent = 'Verberg Sinterklaas nieuws';
-            } else {
-                this.textContent = 'Sinterklaas nieuws';
-            }
-        });
-        
         // Calculate Sinterklaas progress
         function updateSinterklaasProgress() {
             const startDate = new Date('2023-11-01');
