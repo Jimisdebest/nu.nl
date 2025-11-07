@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NU - Het laatste nieuws als eerst op Nu.nl</title>
+    <title>nu.nl - Het laatste nieuws</title>
     <style>
         :root {
             --nu-red: #CC0000;
@@ -71,6 +71,12 @@
             color: var(--nu-red);
         }
         
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
         .sint-button {
             background-color: var(--nu-red);
             color: white;
@@ -86,6 +92,34 @@
         
         .sint-button:hover {
             background-color: var(--nu-dark-red);
+        }
+        
+        .weather-widget {
+            display: flex;
+            align-items: center;
+            background-color: var(--nu-gray);
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .weather-icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+        
+        .weather-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .weather-temp {
+            font-weight: bold;
+        }
+        
+        .weather-location {
+            font-size: 0.8rem;
+            color: #666;
         }
         
         /* Main Content */
@@ -350,6 +384,11 @@
                 margin: 5px 10px;
             }
             
+            .header-right {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
             .news-grid {
                 grid-template-columns: 1fr;
             }
@@ -374,7 +413,16 @@
                 <li><a href="#">Economie</a></li>
                 <li><a href="#">Entertainment</a></li>
             </ul>
-            <a href="sintnieuws.html" class="sint-button">Sinterklaas nieuws</a>
+            <div class="header-right">
+                <div class="weather-widget" id="weatherWidget">
+                    <div class="weather-icon">⛅</div>
+                    <div class="weather-info">
+                        <div class="weather-temp">--°C</div>
+                        <div class="weather-location">Laden...</div>
+                    </div>
+                </div>
+                <a href="sintnieuws.html" class="sint-button">Sinterklaas nieuws</a>
+            </div>
         </div>
     </header>
     
@@ -636,8 +684,73 @@
             document.getElementById('progressPercentage').textContent = `${Math.round(progressPercentage)}%`;
         }
         
-        // Update progress on page load
-        updateSinterklaasProgress();
+        // Weather function using OpenWeatherMap API
+        function getWeather() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        const lat = position.coords.latitude;
+                        const lon = position.coords.longitude;
+                        
+                        // Using OpenWeatherMap API (free tier)
+                        const apiKey = 'b6907d289e10d714a6e88b30761fae22'; // This is a demo key
+                        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=nl`;
+                        
+                        fetch(apiUrl)
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.cod === 200) {
+                                    const temp = Math.round(data.main.temp);
+                                    const city = data.name;
+                                    const weatherIcon = getWeatherIcon(data.weather[0].main);
+                                    
+                                    document.querySelector('.weather-temp').textContent = `${temp}°C`;
+                                    document.querySelector('.weather-location').textContent = city;
+                                    document.querySelector('.weather-icon').textContent = weatherIcon;
+                                } else {
+                                    showDefaultWeather();
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Fout bij ophalen weer:', error);
+                                showDefaultWeather();
+                            });
+                    },
+                    error => {
+                        console.error('Geolocatie fout:', error);
+                        showDefaultWeather();
+                    }
+                );
+            } else {
+                showDefaultWeather();
+            }
+        }
+        
+        function getWeatherIcon(weatherMain) {
+            const iconMap = {
+                'Clear': '☀️',
+                'Clouds': '⛅',
+                'Rain': '🌧️',
+                'Drizzle': '🌦️',
+                'Thunderstorm': '⛈️',
+                'Snow': '❄️',
+                'Mist': '🌫️',
+                'Fog': '🌫️'
+            };
+            
+            return iconMap[weatherMain] || '⛅';
+        }
+        
+        function showDefaultWeather() {
+            document.querySelector('.weather-temp').textContent = '--°C';
+            document.querySelector('.weather-location').textContent = 'Locatie onbekend';
+        }
+        
+        // Update progress and weather on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateSinterklaasProgress();
+            getWeather();
+        });
     </script>
 </body>
 </html>
